@@ -36,17 +36,18 @@
     L.tileLayer('map/{z}/{x}/{y}.png', {
       continuousWorld: false,
       noWrap: true,
-      minZoom: 3,
+      minZoom: 2,
       maxZoom: 6,
     }).addTo(map);
-    //Coordinate Finder
-    var marker = L.marker([39.909736, -89.121094], {
-      draggable: true,
-    }).addTo(map);
-    marker.bindPopup('Location Finder').openPopup();
-    marker.on('dragend', function (e) {
-      marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
-    });
+
+    // //Coordinate Finder
+    // var marker = L.marker([39.909736, -89.121094], {
+    //   draggable: true,
+    // }).addTo(map);
+    // marker.bindPopup('Location Finder').openPopup();
+    // marker.on('dragend', function (e) {
+    //   marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+    // });
 
     map.createPane('districtLabels');
     map.getPane('districtLabels').style.zIndex = 550; // entre overlayPane (400) et markerPane (600)
