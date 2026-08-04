@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+  <title>Lanvorick</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="scripts/leaflet.css">
+  <script src="scripts/leaflet.js"></script>
+  <style>
+    .district-label {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      font-weight: normal;
+      text-transform: uppercase;
+      font-size: 30px;
+      font-family: Calibri;
+      color: #2e2e2e;
+      /* lisibilité sur fond de carte */
+      pointer-events: none;
+      /* le texte ne bloque pas les clics sur la carte */
+    }
+
+    .district-label::before {
+      display: none;
+      /* enlève la petite flèche du tooltip */
+    }
+  </style>
+</head>
+
+<body style="height: 100%; margin: 0;">
+  <div id="map" style="width: 100%; height: 100%; background: #a3a3a3;"></div>
+  <script type="text/javascript">
+    //Creating the Map
+    var map = L.map('map').setView([0, 0], 0);
+    L.tileLayer('map/{z}/{x}/{y}.png', {
+      continuousWorld: false,
+      noWrap: true,
+      minZoom: 3,
+      maxZoom: 6,
+    }).addTo(map);
+    //Coordinate Finder
+    var marker = L.marker([39.909736, -89.121094], {
+      draggable: true,
+    }).addTo(map);
+    marker.bindPopup('Location Finder').openPopup();
+    marker.on('dragend', function (e) {
+      marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+    });
+
+    map.createPane('districtLabels');
+    map.getPane('districtLabels').style.zIndex = 550; // entre overlayPane (400) et markerPane (600)
+    map.getPane('districtLabels').style.pointerEvents = 'none'; // le texte ne bloque pas les clics
+
+    //Markers
+
+    //MAISONS
+    var maison = {
+      iconUrl: "./scripts/images/maison.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customMaison = L.icon(maison);
+    var markerMaison = {
+      icon: customMaison,
+    }
+
+    //POINTS D'INTÉRÊT
+    var poi = {
+      iconUrl: "./scripts/images/poi.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40]
+    }
+    var customPoi = L.icon(poi);
+    var markerPoi = {
+      icon: customPoi,
+    }
+
+    //LIEUX
+    var lieu = {
+      iconUrl: "./scripts/images/lieu.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40]
+    }
+    var customLieu = L.icon(lieu);
+    var markerLieu = {
+      icon: customLieu,
+    }
+
+    //RESTAURANTS & BARS
+    var resto = {
+      iconUrl: "./scripts/images/resto.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customResto = L.icon(resto);
+    var markerResto = {
+      icon: customResto,
+    }
+
+    var cafe = {
+      iconUrl: "./scripts/images/cafe.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customCafe = L.icon(cafe);
+    var markerCafe = {
+      icon: customCafe,
+    }
+
+    var bar = {
+      iconUrl: "./scripts/images/bar.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customBar = L.icon(bar);
+    var markerBar = {
+      icon: customBar,
+    }
+
+    //PARCS
+    var parc = {
+      iconUrl: "./scripts/images/parc.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customParc = L.icon(parc);
+    var markerParc = {
+      icon: customParc,
+    }
+
+    //ÉGLISES
+    var eglise = {
+      iconUrl: "./scripts/images/eglise.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customEglise = L.icon(eglise);
+    var markerEglise = {
+      icon: customEglise,
+    }
+
+    //DIVERS
+    var aeroport = {
+      iconUrl: "./scripts/images/aeroport.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customAeroport = L.icon(aeroport);
+    var markerAeroport = {
+      icon: customAeroport,
+    }
+
+    var batiment = {
+      iconUrl: "./scripts/images/batiment.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customBatiment = L.icon(batiment);
+    var markerBatiment = {
+      icon: customBatiment,
+    }
+
+    var castle = {
+      iconUrl: "./scripts/images/castle.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customCastle = L.icon(castle);
+    var markerCastle = {
+      icon: customCastle,
+    }
+
+    var club = {
+      iconUrl: "./scripts/images/club.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customClub = L.icon(club);
+    var markerClub = {
+      icon: customClub,
+    }
+
+    var gare = {
+      iconUrl: "./scripts/images/gare.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customGare = L.icon(gare);
+    var markerGare = {
+      icon: customGare,
+    }
+
+    var hopital = {
+      iconUrl: "./scripts/images/hopital.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customHopital = L.icon(hopital);
+    var markerHopital = {
+      icon: customHopital,
+    }
+
+    var police = {
+      iconUrl: "./scripts/images/police.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customPolice = L.icon(police);
+    var markerPolice = {
+      icon: customPolice,
+    }
+
+    var shop = {
+      iconUrl: "./scripts/images/shop.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customShop = L.icon(shop);
+    var markerShop = {
+      icon: customShop,
+    }
+
+    var stade = {
+      iconUrl: "./scripts/images/stade.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customStade = L.icon(stade);
+    var markerStade = {
+      icon: customStade,
+    }
+
+    var travail = {
+      iconUrl: "./scripts/images/travail.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customTravail = L.icon(travail);
+    var markerTravail = {
+      icon: customTravail,
+    }
+
+    var universite = {
+      iconUrl: "./scripts/images/universite.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customUniversite = L.icon(universite);
+    var markerUniversite = {
+      icon: customUniversite,
+    }
+
+    var theatre = {
+      iconUrl: "./scripts/images/theatre.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customTheatre = L.icon(theatre);
+    var markerTheatre = {
+      icon: customTheatre,
+    }
+
+    var zi = {
+      iconUrl: "./scripts/images/zi.png",
+      iconSize: [25, 35],
+      iconAnchor: [12, 35],
+      popupAnchor: [0, -40],
+      tooltipAnchor: Point = [15, -20]
+    }
+    var customZi = L.icon(zi);
+    var markerZi = {
+      icon: customZi,
+    }
+
+    // var districtData = [];
+
+    function districtLabel(lat, lng, name) {
+      return L.marker([lat, lng], {
+        icon: L.divIcon({ className: 'invisible-icon', iconSize: [0, 0] }),
+        interactive: false
+      }).bindTooltip(name, {
+        permanent: true,
+        direction: 'center',
+        className: 'district-label',
+        pane: 'districtLabels',
+        opacity: 0.25
+      });
+    }
+
+    //MARQUEURS QUARTIERS
+    var brannocward = districtLabel(-0.527336, -23.378906, 'St Brannoc\'s Ward');
+    var brackenyard = districtLabel(27.371767, 6.152344, 'Bracken Yard');
+    var rivergate = districtLabel(-35.46067, -40.429688, 'Rivergate');
+    var penrose = districtLabel(-21.453069, -117.421875, 'Penrose Hills');
+    var penbrannoc = districtLabel(24.686952, 88.417969, 'Bois de Penbrannoc');
+
+    //MARQUEURS HABITATIONS
+    var aileen = L.marker([-9.622414, -115.927734], markerMaison).bindPopup('<b>Miss Aileen Lewis</b><br/>14 Parson\'s Row<br/>Lanvorick LNV 4RK');
+    aileen.bindTooltip("Chez Aileen");
+    var coloc = L.marker([28.72913, -32.915039], markerMaison).bindPopup('<b>Mr Lachlann McCruikshank & Mr Miles McCruikshank</b><br/>Flat A (1st Floor)<br/>———————————<br/><b>Mr Caerwyn Bevans, Miss Nahema Grant & Miss Teodora von Meissen</b><br/>Flat B (2nd Floor)<br/><br/>19 Emms Road<br/>Lanvorick LNV 4RK');
+    coloc.bindTooltip("Chez les McCruikshank, Teddy, Nahema & Caerwyn");
+    var evelyn = L.marker([14.4134, -25.532227], markerMaison).bindPopup('<b>Miss Evelyn O\'Brien</b><br/>14, Penrose Lane<br/>Lanvorick LNV 4RK');
+    evelyn.bindTooltip("Chez Evelyn");
+    var liam = L.marker([-11.264612, -68.57666], markerMaison).bindPopup('<b>Mr Liam Dubhspòg</b><br/><i>"Les Neuf Vies", bar à chats</i><br/>31 Gallows Road<br/>Lanvorick LNV 4RK');
+    liam.bindTooltip("Chez Liam");
+    var noe = L.marker([-8.407168, -113.291016], markerMaison).bindPopup('<b>Mr Noe Elling</b><br/>16 Parson\'s Row<br/>Lanvorick LNV 4RK');
+    noe.bindTooltip("Chez Noe");
+
+    //MARQUEURS LIEUX
+    var mine = L.marker([46.316584, 53.964844], markerPoi).bindPopup('<center><b>Mine désaffectée</b><br/>Ancienne mine d\'étain fermée suite<br>à l\'effondrement des galeries en 1997.<br><a href ="https://whatlurksoutside.forumactif.com/t34-the-brannoc-chronicle-le-quotidien-le-plus-vendu-de-lanvorick#111">Lien vers l\'article →</a></center>');
+    var abbaye = L.marker([6.926427, 56.513672], markerPoi).bindPopup('<center><b>Monastère en ruines</b><br/>Ruines dans un ancien lieu de culte<br>mangé par la végétation au fil des siècles.</center>');
+    var tourbiere = L.marker([-36.173357, 48.867188], markerPoi).bindPopup('<center><b>Tourbière des Noyés</b><br/>Marécages humides et dangereux<br>tout au long de l\'année</center>');
+    var cercle = L.marker([-26.194877, 47.8125], markerPoi).bindPopup('<center><b>Cercle Druidique</b><br/>Courbe fermée dont tous les dolmens et menhirs qui le composent sont à la même distance d\'un point fixe. Datant probablement de l\'Antiquité, on dit qu\'il change d\'emplacement dans la tourbière.</center>');
+    var skatepark = L.marker([37.370157, 23.90625], markerPoi).bindPopup('<center><b>Skatepark abandonné</b><br/>Infracstructure condamnée<br>Devenu place de deal principal de Lanvorick<br></center>');
+    var coven = L.marker([-10.833306, 61.347656], markerPoi).bindPopup('<center><b>Coven du Cercle des Terres Blanches</b><br/>Coven de sorcières principal de Lanvorick<br><i>Tenu par la matriarche <a href="ttps://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#3630">Amaranth Kyteler</a></i></center>');
+
+    //MARQUEURS BÂTIMENTS
+    var avion = L.marker([55.429013, -11.865234], markerAeroport).bindPopup('<center><b>Aérodrome Princess Margaret</b><br/>Aérodrome de Lanvorick destiné au fret.<br>Construit pendant la Seconde Guerre Mondiale.</center>');
+    var chateau = L.marker([14.626109, 5.20752], markerCastle).bindPopup('<center><b>Lanvorick Castle</b><br/>Ancien château visitable</br>datant du XIIème siècle</center>');
+    var cimetiere = L.marker([4.039618, 21.269531], markerEglise).bindPopup('<center><b>Cimetière de Lanvorick</b><br/>Principal et plus vieux cimetière de<br>Lanvorick, rattaché à l\'église St Michael</center>');
+    var ccommercial = L.marker([-41.310824, -22.324219], markerShop).bindPopup('<center><b>Brenn Shopping Center</b><br/>Nouvel et imposant espace de shopping.<br/>Inauguré en 2016</center>');
+    var morcant = L.marker([65.802776, -39.199219], markerLieu).bindPopup('<center><b>Morcant Manoir</b><br/>Lieu de résidence de <a href=https://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#84>Jeremiah</a> et <a href=https://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#85>Penelope</a> Rockwood. Point de ralliement des Traqueurs.</center>');
+    var commissariat = L.marker([34.343436, -44.033203], markerPolice).bindPopup('<center><b>Hôtel de Police</b><br/>Quartier général de la police<br>de Lanvorick</center>');
+    var cuthbert = L.marker([36.5626, -11.162109], markerEglise).bindPopup('<center><b>Église St Cuthbert</b><br/>Édifice religieux à l\'architecture<br/>baroque du XIXème siècle</center>');
+    var station = L.marker([34.161818, 12.65625], markerGare).bindPopup('<center><b>Gare Richard II</b><br/>Gare ferroviaire de Lanvorick<br/>construite au XIXème siècle</center>');
+    var hopitalU = L.marker([21.453069, -73.740234], markerHopital).bindPopup('<center><b>Royal Lanvorick Hospital</b><br/>Principal centre hospitalier</br>de Lanvorick</center>');
+    var mairie = L.marker([4.214943, -32.871094], markerBatiment).bindPopup('<center><b>Hôtel de Ville</b><br/>Mairie de Lanvorick</br><i>Maire actuelle : <a href="https://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#59">Beatrix Dashford</a></i></center>');
+    var docks = L.marker([-25.799891, -44.121094], markerClub).bindPopup('<center><b>Brenn Docks</b><br/>Quais du Brenn réhabilités pour la vie nocturne et étudiante. On retrouve beaucoup de bars et de nightclubs.</center>');
+    var patinoire = L.marker([-42.988576, -48.867188], markerStade).bindPopup('<center><b>Patinoire de Lanvorick</b><br/>Construite en 1981, la patinoire est<br>le centre principal des sports de glace</center>');
+    var fondation = L.marker([50.205033, 80.661621], markerLieu).bindPopup('<center><b>Fondation St Meredith</b><br/>Clinique vétérinaire servant de couverture<br>à un refuge pour créatures surnaturelles<br><i>Dirigé par <a href="https://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#79">Philipp Manson</a></i></center>');
+    var stadium = L.marker([-38.754083, -94.306641], markerStade).bindPopup('<center><b>Stade Brian Clough</b><br/>Stade aux gradins couverts<br>adapté pour les sports collectifs sur gazon</center>');
+    var tribunal = L.marker([6.184246, -20.830078], markerBatiment).bindPopup('<center><b>Palais de Justice</b><br/>Principal centre des instances judiciaires de Lanvorick</center>');
+    var theater = L.marker([27.176469, -11.865234], markerTheatre).bindPopup('<center><b>The Tor Theater</b><br/>Principal théâtre de la ville</br>construit à la fin du XIXème siècle</center>');
+    var uni = L.marker([35.173808, -88.154297], markerUniversite).bindPopup('<center><b>Université de Lanvorick</b><br/>Campus universitaire spécialisées dans les sciences naturelles, l\'Histoire et les arts</center>');
+    var enedoch = L.marker([-9.362353, -19.951172], markerEglise).bindPopup('<center><b>Cathédrale St Enedoch</b><br/>Édifice religieux dont le début de la<br>construction date du XVIIème siècle</center>');
+    var michael = L.marker([5.747174, 23.994141], markerEglise).bindPopup('<center><b>Église St Michael</b><br/>Édifice religieux à l\'architecture<br/>gothique du XIIIème siècle</center>');
+    var indus = L.marker([27.000408, 33.75], markerZi).bindPopup('<center><b>Zone industrielle</b><br/>Cœur industriel de la ville pendant<br>la révolution industrielle et jusque dans les années 70. Majoritairement à l\'abandon désormais.</center>');
+
+
+    //MARQUEURS RESTOS & BARS
+    var neufvies = L.marker([-11.609193, -68.093262], markerCafe).bindPopup('<center><b>Les Neuf Vies</b></br><i>Tenu par Liam Dubhspòg</i><br/>Bar à chats, sans vente d\'alcool</center>');
+    var drownedgirl = L.marker([46.739861, 14.216309], markerBar).bindPopup('<center><b>The Drowned Girl</b></br>Bar à mauvaise réputation</center>');
+    var piskielantern = L.marker([-38.548165, -6.459961], markerBar).bindPopup('<center><b>The Piskie Lantern</b><br/>Pub en bordure de ville<br>avec scène de concert</center>');
+    var eldergrove = L.marker([-1.406109, -73.476563], markerBar).bindPopup('<center><b>The Elder Grove</b><br/>Pub traditionnel</center>');
+    var palazzo = L.marker([-4.740675, -55.327148], markerResto).bindPopup('<center><b>Palazzo Verdi</b></br>Restaurant chic italien</center>');
+    var millesept = L.marker([-22.065278, -23.027344], markerCafe).bindPopup('<center><b>Le 1747</b><br/>Salon de thé spécialisé<br>en chocolats chauds</center>');
+    var cornishorchard = L.marker([48.922499, -16.875], markerResto).bindPopup('<center><b>The Cornish Orchard</b><br/>Petit restaurant aux prix abordables</center>');
+    var tablelandes = L.marker([16.341226, -34.541016], markerResto).bindPopup('<center><b>La Table des Landes</b><br/>Restaurant prisé aux spécialités française</center>');
+    var saltcellar = L.marker([38.61687, -65.390625], markerResto).bindPopup('<center><b>The Salt Cellar</b><br/>Restaurant spécialisé<br>dans les fruits de mer</center>');
+    var brannocarms = L.marker([-5.790897, -10.722656], markerBar).bindPopup('<center><b>The Brannoc Arms</b><br/>Pub avec une petite scène de concert</center>');
+
+    //MARQUEURS PARCS
+    var enedochpark = L.marker([-12.983148, -35.507813], markerParc).bindPopup('<center><b>St Enedoch\'s Park</b><br/>Plus grand parc de Lanvorick<br>situé au cœur de la ville</center>');
+    var kingsrow = L.marker([15.029686, -37.001953], markerParc).bindPopup('<center><b>King\'s Row Square</b><br/>Square verdoyant du quartier<br>de Saint Brannoc Ward</center>');
+    var castlercorner = L.marker([13.581921, 0.703125], markerParc).bindPopup('<center><b>Castle Corner Park</b><br/>Parc au pied du<br>château de Lanvorick</center>');
+    var drift = L.marker([4.82826, -68.90625], markerParc).bindPopup('<center><b>Drift Square</b><br/>Petit square tranquille<br>de Rivergate</center>');
+    var sybille = L.marker([-28.536275, -63.984375], markerParc).bindPopup('<center><b>St Sybille Park</b><br/>Principal parc du quartier<br>de Rivergate</center>');
+
+    //Marker Groups
+    var g_houses = L.layerGroup([aileen, coloc, evelyn, liam, noe]);
+    var g_poi = L.layerGroup([mine, tourbiere, abbaye, cercle, coven, skatepark]);
+    var g_places = L.layerGroup([avion, theater, enedoch, uni, chateau, fondation, mairie, cuthbert, hopitalU, station, commissariat, ccommercial, cimetiere, indus, patinoire, tribunal, stadium, morcant, michael]);
+    var g_resto = L.layerGroup([palazzo, docks, drownedgirl, eldergrove, cornishorchard, neufvies, brannocarms, saltcellar, piskielantern, millesept, tablelandes]);
+    var g_parc = L.layerGroup([enedochpark, sybille, castlercorner, kingsrow, drift]);
+    var g_districts = L.layerGroup([brannocward, brackenyard, rivergate, penrose, penbrannoc]);
+
+    // function refreshDistrictLabels() {
+    //   var scale = zoomScaleFactor[map.getZoom()] || 1;
+    //   districtData.forEach(function (marker) {
+    //     var tooltip = marker.getTooltip();
+    //     if (!tooltip) return;
+    //     var el = tooltip.getElement();
+    //     var inner = el && el.querySelector('.district-label-inner');
+    //     if (inner) inner.style.transform = 'scale(' + scale + ')';
+    //   });
+    // }
+
+    //Marker Overlay
+    var overlays = {
+      "Habitations": g_houses,
+      "Lieux de la ville": g_places,
+      "Points d'intérêt": g_poi,
+      "Restaurants & bars": g_resto,
+      "Places & parcs": g_parc
+    }
+
+    g_houses.addTo(map);
+    g_poi.addTo(map);
+    g_places.addTo(map);
+    g_resto.addTo(map);
+    g_parc.addTo(map);
+    g_districts.addTo(map);
+    //GROUP CONTROLS
+    L.control.layers(null, overlays).addTo(map);
+    /*//Polylines
+    var latlngs = [
+    [-37.71859, 15.292969],
+    [-36.315125, 18.149414],
+    [-35.46067, 21.401367],
+    [-34.234512, 29.487305],
+    [-32.398516, 33.00293],
+    [-31.203405, 35.200195],
+    [-31.052934, 44.912109],
+    [-34.161818, 60.952148]    
+    ];
+
+    var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+    polyline.bindTooltip("Road?");
+  //Polygon    
+    var polygon = L.polygon([
+      [-27.527758, -88.857422],
+      [-40.111689, -76.289063],
+      [-50.903033, -100.283203],
+      [-42.423457, -114.960938]
+    ], {color: 'green'}).addTo(map);
+     polygon.bindPopup("A polygon.");
+     polygon.bindTooltip("A polygon");*/
+  </script>
+</body>
+
+</html>
