@@ -350,7 +350,7 @@
     coloc.bindTooltip("Chez les McCruikshank, Teddy, Nahema & Caerwyn");
     var evelyn = L.marker([14.4134, -25.532227], markerMaison).bindPopup('<b>Miss Evelyn O\'Brien</b><br/>14, Penrose Lane<br/>Lanvorick LNV 4RK');
     evelyn.bindTooltip("Chez Evelyn");
-    var liam = L.marker([-11.264612, -68.57666], markerMaison).bindPopup('<b>Mr Liam Dubhspòg</b><br/><i>"Les Neuf Vies", bar à chats</i><br/>31 Gallows Road<br/>Lanvorick LNV 4RK');
+    var liam = L.marker([-19.993998, -54.074707], markerMaison).bindPopup('<b>Mr Liam Dubhspòg</b><br/><i>"Les Neuf Vies", bar à chats</i><br/>31 Gallows Road<br/>Lanvorick LNV 4RK');
     liam.bindTooltip("Chez Liam");
     var noe = L.marker([-8.407168, -113.291016], markerMaison).bindPopup('<b>Mr Noe Elling</b><br/>16 Parson\'s Row<br/>Lanvorick LNV 4RK');
     noe.bindTooltip("Chez Noe");
@@ -362,6 +362,8 @@
     var cercle = L.marker([-26.194877, 47.8125], markerPoi).bindPopup('<center><b>Cercle Druidique</b><br/>Courbe fermée dont tous les dolmens et menhirs qui le composent sont à la même distance d\'un point fixe. Datant probablement de l\'Antiquité, on dit qu\'il change d\'emplacement dans la tourbière.</center>');
     var skatepark = L.marker([37.370157, 23.90625], markerPoi).bindPopup('<center><b>Skatepark abandonné</b><br/>Infracstructure condamnée<br>Devenu place de deal principal de Lanvorick<br></center>');
     var coven = L.marker([-10.833306, 61.347656], markerPoi).bindPopup('<center><b>Coven du Cercle des Terres Blanches</b><br/>Coven de sorcières principal de Lanvorick<br><i>Tenu par la matriarche <a href="ttps://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#3630">Amaranth Kyteler</a></i></center>');
+    var docks = L.marker([-25.799891, -44.121094], markerPoi).bindPopup('<center><b>Brenn Docks</b><br/>Quais du Brenn réhabilités pour la vie nocturne et étudiante. On retrouve beaucoup de bars et de nightclubs.</center>');
+    
 
     //MARQUEURS BÂTIMENTS
     var avion = L.marker([55.429013, -11.865234], markerAeroport).bindPopup('<center><b>Aérodrome Princess Margaret</b><br/>Aérodrome de Lanvorick destiné au fret.<br>Construit pendant la Seconde Guerre Mondiale.</center>');
@@ -374,7 +376,6 @@
     var station = L.marker([34.161818, 12.65625], markerGare).bindPopup('<center><b>Gare Richard II</b><br/>Gare ferroviaire de Lanvorick<br/>construite au XIXème siècle</center>');
     var hopitalU = L.marker([21.453069, -73.740234], markerHopital).bindPopup('<center><b>Royal Lanvorick Hospital</b><br/>Principal centre hospitalier</br>de Lanvorick</center>');
     var mairie = L.marker([4.214943, -32.871094], markerBatiment).bindPopup('<center><b>Hôtel de Ville</b><br/>Mairie de Lanvorick</br><i>Maire actuelle : <a href="https://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#59">Beatrix Dashford</a></i></center>');
-    var docks = L.marker([-25.799891, -44.121094], markerClub).bindPopup('<center><b>Brenn Docks</b><br/>Quais du Brenn réhabilités pour la vie nocturne et étudiante. On retrouve beaucoup de bars et de nightclubs.</center>');
     var patinoire = L.marker([-42.988576, -48.867188], markerStade).bindPopup('<center><b>Patinoire de Lanvorick</b><br/>Construite en 1981, la patinoire est<br>le centre principal des sports de glace</center>');
     var fondation = L.marker([50.205033, 80.661621], markerLieu).bindPopup('<center><b>Fondation St Meredith</b><br/>Clinique vétérinaire servant de couverture<br>à un refuge pour créatures surnaturelles<br><i>Dirigé par <a href="https://whatlurksoutside.forumactif.com/t22-bottin-des-pnj-venez-rencontrer-les-habitants-de-lanvorick#79">Philipp Manson</a></i></center>');
     var stadium = L.marker([-38.754083, -94.306641], markerStade).bindPopup('<center><b>Stade Brian Clough</b><br/>Stade aux gradins couverts<br>adapté pour les sports collectifs sur gazon</center>');
@@ -387,7 +388,7 @@
 
 
     //MARQUEURS RESTOS & BARS
-    var neufvies = L.marker([-11.609193, -68.093262], markerCafe).bindPopup('<center><b>Les Neuf Vies</b></br><i>Tenu par Liam Dubhspòg</i><br/>Bar à chats, sans vente d\'alcool</center>');
+    var neufvies = L.marker([-20.220966, -53.547363], markerCafe).bindPopup('<center><b>Les Neuf Vies</b></br><i>Tenu par Liam Dubhspòg</i><br/>Bar à chats, sans vente d\'alcool<br><a href ="https://whatlurksoutside.forumactif.com/t143-le-bar-des-neufs-vies-description-de-lieu#3652">Description du lieu →</a></center>');
     var drownedgirl = L.marker([46.739861, 14.216309], markerBar).bindPopup('<center><b>The Drowned Girl</b></br>Bar à mauvaise réputation</center>');
     var piskielantern = L.marker([-38.548165, -6.459961], markerBar).bindPopup('<center><b>The Piskie Lantern</b><br/>Pub en bordure de ville<br>avec scène de concert</center>');
     var eldergrove = L.marker([-1.406109, -73.476563], markerBar).bindPopup('<center><b>The Elder Grove</b><br/>Pub traditionnel</center>');
@@ -397,6 +398,8 @@
     var tablelandes = L.marker([16.341226, -34.541016], markerResto).bindPopup('<center><b>La Table des Landes</b><br/>Restaurant prisé aux spécialités française</center>');
     var saltcellar = L.marker([38.61687, -65.390625], markerResto).bindPopup('<center><b>The Salt Cellar</b><br/>Restaurant spécialisé<br>dans les fruits de mer</center>');
     var brannocarms = L.marker([-5.790897, -10.722656], markerBar).bindPopup('<center><b>The Brannoc Arms</b><br/>Pub avec une petite scène de concert</center>');
+    var vault = L.marker([-27.76133, -38.144531], markerClub).bindPopup('<center><b>The Vault</b><br/>Boîte de nuit en vogue de la ville</center>');
+    
 
     //MARQUEURS PARCS
     var enedochpark = L.marker([-12.983148, -35.507813], markerParc).bindPopup('<center><b>St Enedoch\'s Park</b><br/>Plus grand parc de Lanvorick<br>situé au cœur de la ville</center>');
@@ -407,9 +410,9 @@
 
     //Marker Groups
     var g_houses = L.layerGroup([aileen, coloc, evelyn, liam, noe]);
-    var g_poi = L.layerGroup([mine, tourbiere, abbaye, cercle, coven, skatepark]);
+    var g_poi = L.layerGroup([mine, tourbiere, abbaye, cercle, coven, skatepark, docks]);
     var g_places = L.layerGroup([avion, theater, enedoch, uni, chateau, fondation, mairie, cuthbert, hopitalU, station, commissariat, ccommercial, cimetiere, indus, patinoire, tribunal, stadium, morcant, michael]);
-    var g_resto = L.layerGroup([palazzo, docks, drownedgirl, eldergrove, cornishorchard, neufvies, brannocarms, saltcellar, piskielantern, millesept, tablelandes]);
+    var g_resto = L.layerGroup([vault, palazzo, drownedgirl, eldergrove, cornishorchard, neufvies, brannocarms, saltcellar, piskielantern, millesept, tablelandes]);
     var g_parc = L.layerGroup([enedochpark, sybille, castlercorner, kingsrow, drift]);
     var g_districts = L.layerGroup([brannocward, brackenyard, rivergate, penrose, penbrannoc]);
 
