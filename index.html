@@ -32,11 +32,20 @@
   <div id="map" style="width: 100%; height: 100%; background: #a3a3a3;"></div>
   <script type="text/javascript">
     //Creating the Map
-    var map = L.map('map').setView([0, 0], 0);
+    var mapBounds = L.latLngBounds(
+      [-75, -155],  // coin sud-ouest — À REMPLACER par tes vraies valeurs
+      [75, 165]      // coin nord-est — À REMPLACER par tes vraies valeurs
+    );
+
+    var map = L.map('map', {
+      maxBounds: mapBounds,
+      maxBoundsViscosity: 1.0
+    }).setView([0, 0], 0);
+
     L.tileLayer('map/{z}/{x}/{y}.png', {
-      continuousWorld: false,
       noWrap: true,
-      minZoom: 2,
+      bounds: mapBounds,
+      minZoom: 3,
       maxZoom: 6,
     }).addTo(map);
 
