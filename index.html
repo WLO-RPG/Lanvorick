@@ -49,14 +49,14 @@
       maxZoom: 6,
     }).addTo(map);
 
-    // //Coordinate Finder
-    // var marker = L.marker([39.909736, -89.121094], {
-    //   draggable: true,
-    // }).addTo(map);
-    // marker.bindPopup('Location Finder').openPopup();
-    // marker.on('dragend', function (e) {
-    //   marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
-    // });
+     //Coordinate Finder
+     /*var marker = L.marker([39.909736, -89.121094], {
+       draggable: true,
+     }).addTo(map);
+     marker.bindPopup('Location Finder').openPopup();
+     marker.on('dragend', function (e) {
+       marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+    });*/
 
     map.createPane('districtLabels');
     map.getPane('districtLabels').style.zIndex = 550; // entre overlayPane (400) et markerPane (600)
@@ -350,6 +350,8 @@
     coloc.bindTooltip("Chez les McCruikshank, Teddy, Nahema & Caerwyn");
     var evelyn = L.marker([14.4134, -25.532227], markerMaison).bindPopup('<b>Miss Evelyn O\'Brien</b><br/>14, Penrose Lane<br/>Lanvorick LNV 4RK');
     evelyn.bindTooltip("Chez Evelyn");
+    var fergal = L.marker([-14.32826, -3.55957], markerMaison).bindPopup('<b>Mr. Fergal Armitage</b><br/>03 Oaks End<br/>Lanvorick LNV 4RK');
+    aileen.bindTooltip("Chez Aileen");
     var liam = L.marker([-19.993998, -54.074707], markerMaison).bindPopup('<b>Mr Liam Dubhspòg</b><br/><i>"Les Neuf Vies", bar à chats</i><br/>31 Gallows Road<br/>Lanvorick LNV 4RK');
     liam.bindTooltip("Chez Liam");
     var noe = L.marker([-8.407168, -113.291016], markerMaison).bindPopup('<b>Mr Noe Elling</b><br/>16 Parson\'s Row<br/>Lanvorick LNV 4RK');
@@ -390,6 +392,7 @@
     //MARQUEURS RESTOS & BARS
     var neufvies = L.marker([-20.220966, -53.547363], markerCafe).bindPopup('<center><b>Les Neuf Vies</b></br><i>Tenu par Liam Dubhspòg</i><br/>Bar à chats, sans vente d\'alcool<br><a href ="https://whatlurksoutside.forumactif.com/t143-le-bar-des-neufs-vies-description-de-lieu#3652">Description du lieu →</a></center>');
     var drownedgirl = L.marker([46.739861, 14.216309], markerBar).bindPopup('<center><b>The Drowned Girl</b></br>Bar à mauvaise réputation</center>');
+    var greenmermaid = L.marker([-23.281719, -46.538086], markerBar).bindPopup('<center><b>The Green Mermaid</b></br>Bar queer</center>');
     var piskielantern = L.marker([-38.548165, -6.459961], markerBar).bindPopup('<center><b>The Piskie Lantern</b><br/>Pub en bordure de ville<br>avec scène de concert</center>');
     var eldergrove = L.marker([-1.406109, -73.476563], markerBar).bindPopup('<center><b>The Elder Grove</b><br/>Pub traditionnel</center>');
     var palazzo = L.marker([-4.740675, -55.327148], markerResto).bindPopup('<center><b>Palazzo Verdi</b></br>Restaurant chic italien</center>');
@@ -409,10 +412,10 @@
     var sybille = L.marker([-28.536275, -63.984375], markerParc).bindPopup('<center><b>St Sybille Park</b><br/>Principal parc du quartier<br>de Rivergate</center>');
 
     //Marker Groups
-    var g_houses = L.layerGroup([aileen, coloc, evelyn, liam, noe]);
+    var g_houses = L.layerGroup([aileen, coloc, evelyn, fergal, liam, noe]);
     var g_poi = L.layerGroup([mine, tourbiere, abbaye, cercle, coven, skatepark, docks]);
     var g_places = L.layerGroup([avion, theater, enedoch, uni, chateau, fondation, mairie, cuthbert, hopitalU, station, commissariat, ccommercial, cimetiere, indus, patinoire, tribunal, stadium, morcant, michael]);
-    var g_resto = L.layerGroup([vault, palazzo, drownedgirl, eldergrove, cornishorchard, neufvies, brannocarms, saltcellar, piskielantern, millesept, tablelandes]);
+    var g_resto = L.layerGroup([vault, palazzo, drownedgirl, eldergrove, cornishorchard, neufvies, brannocarms, saltcellar, piskielantern, millesept, tablelandes, greenmermaid]);
     var g_parc = L.layerGroup([enedochpark, sybille, castlercorner, kingsrow, drift]);
     var g_districts = L.layerGroup([brannocward, brackenyard, rivergate, penrose, penbrannoc]);
 
